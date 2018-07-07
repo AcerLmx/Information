@@ -17,8 +17,10 @@ public class EvaluateExpression {
         try {
             result=  engine.eval(exp).toString();
             value= Double.parseDouble(result);
-            System.out.println("value:"+value);
+            //System.out.println("value:"+value);
         } catch (ScriptException e) {
+
+
             e.printStackTrace();
         }
         return  value;

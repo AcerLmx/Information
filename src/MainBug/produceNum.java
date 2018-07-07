@@ -12,7 +12,8 @@ public class produceNum {
 
     public static int gcd(int x,int y)
     {
-        return gcd(y,x%y);
+        if(y==0)return x;
+        else return gcd(y,x%y);
     }
     public static f setf(f s)
     {
@@ -67,39 +68,6 @@ public class produceNum {
         ansf.x=ansf.x/yue;
         ansf.y=ansf.y/yue;
         return ansf;
-    }
-    //public static String s=e2(0);
-    public static void printText() {
-       /*for(int i=1;i<=50;i++)
-            produceNum pro=new produceNum();
-            String str=pro.e2(0);
-            fileText.createFile("Exercises",i+": "+str+" = ");
-            fileText.createFile("Answers",i+": "+ans.evaluateExpression(str));
-        }*/
-
-       //检验一到四年级全为整数
-      /*  produceNum pro=new produceNum();
-        EvaluateExpression eval=new EvaluateExpression();
-        String str=pro.four(0);
-        double result2=eval.evaluateExpressionDouble(str);
-        //判断负号和小数，如果有负号，小数，重新生成
-        while(result2<0||(int)result2!=result2) {
-            pro=new produceNum();
-            eval=new EvaluateExpression();
-            str=pro.four(0);
-            result2=eval.evaluateExpressionDouble(str); //计算表达式
-        }
-        System.out.println(str);
-        System.out.println((int)result2);*/
-
-        produceNum pro=new produceNum();
-        EvaluateExpression eval=new EvaluateExpression();
-        String str=pro.five(0);
-        System.out.println(str);
-        String suffix =eval.infixToSuffix(str);//中缀转后缀
-        System.out.println(suffix);
-        double result2=eval.suffixToArithmetic(suffix);
-        System.out.println(result2);
     }
 
     //单个加减
@@ -169,85 +137,238 @@ public class produceNum {
         }
     }
 
-    public String five(int dep)
-    {
-        Random rand=new Random();
-        int num=rand.nextInt(6);
-        if((num==0&&dep>0)||dep>=2) {
-            return String.format("%d",rand.nextInt(9)+1)+"/"+String.format("%d",rand.nextInt(9)+1);
-        }
-        else if(num==1){
-            return five(dep+1)+" + "+five(dep+1);
-        }
-        else {
-            return five(dep+1)+" - "+five(dep+1);
-        }
-    }
-    public String model(int x)
+    public f five()
     {
         Random rand=new Random();
         int num=rand.nextInt(17)+1;
+
+        f anst=new f();f s1=new f();f s2=new f();f s3=new f();f s4=new f();
+        s1=setf(s1);s2=setf(s2);s3=setf(s3);s4=setf(s4);
+        String ss="";
         switch (num)
         {
-            f anst=new f();f s1=new f();f s2=new f();f s3=new f();f s4=new f();
-            anst=(setf(s1)+setf(s2))-(setf(s3)+setf(s3));
-            case 1:  s[t].value = (s[t].j + s[t].k) - (s[t].m + s[t].n); break;
-            case 2:  s[t].value = (s[t].j - s[t].k) - (s[t].m + s[t].n); break;
-            case 3:  s[t].value = (s[t].j - s[t].k) - (s[t].m - s[t].n); break;
-            case 4:  s[t].value = (s[t].j + s[t].k)*(s[t].m + s[t].n); break;
-            case 5:  s[t].value = (s[t].j + s[t].k)*(s[t].m - s[t].n); break;
-            case 6:  s[t].value = (s[t].j - s[t].k)*(s[t].m + s[t].n); break;
-            case 7:  s[t].value = (s[t].j - s[t].k)*(s[t].m - s[t].n); break;
-            case 8: s[t].value = (s[t].j*s[t].k)*(s[t].m + s[t].n); break;
-            case 9: s[t].value = (s[t].j*s[t].k)*(s[t].m - s[t].n); break;
-            case 10: s[t].value = s[t].j + s[t].k + s[t].m + s[t].n; break;
-            case 11: s[t].value = s[t].j - s[t].k - s[t].m - s[t].n; break;
-            case 12: s[t].value = s[t].j*s[t].k*s[t].m; break;
-            case 13: s[t].value = s[t].j*s[t].k*s[t].m + s[t].n; break;
-            case 14: s[t].value = s[t].j*s[t].k*s[t].m - s[t].n; break;
-            case 15: s[t].value = s[t].j + s[t].k; break;
-            case 16: s[t].value = s[t].j - s[t].k; break;
-            case 17: s[t].value = s[t].j*s[t].k; break;
+            case 1:
+                anst=reducef(addf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 2:
+                anst=reducef(reducef(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 3:
+                anst=reducef(reducef(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                 break;
+            case 4:
+                anst=chengf(addf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                 break;
+            case 5:
+                anst=chengf(addf(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                 break;
+            case 6:
+                anst=chengf(reducef(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 7:
+                anst=chengf(reducef(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 8:
+                anst=chengf(chengf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 9:
+                anst=chengf(chengf(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+               // System.out.println("("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 10:
+                anst=addf(addf(s1,s2),addf(s3,s4));
+                ss=s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+" + "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y;
+                //System.out.println(s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+" + "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 11:
+                anst=reducef(s1,reducef(reducef(s2,s3),s4));
+                ss=s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+" - "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y;
+                //System.out.println(s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+" - "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 12:
+                anst=chengf(s1,chengf(s2,s3));
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y;
+               // System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 13:
+                anst=addf(chengf(s1,chengf(s2,s3)),s4);
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y;
+               // System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 14:
+                anst=reducef(chengf(s1,chengf(s2,s3)),s4);
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y;
+                //System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 15:
+                anst=addf(s1,s2);
+                ss=s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y;
+                //System.out.println(s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 16:
+                anst=reducef(s1,s2);
+                ss=s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y;
+                //System.out.println(s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 17:
+                anst=chengf(s1,s2);
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y;
+                //System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" = "+anst.x+"/"+anst.y);
+                break;
         }
+        if(anst.x/anst.y>=0)
+        { System.out.println(ss);
+        }
+    return anst;
     }
 
-
-
-    public  String ee(int dep) {
+    public f six()
+    {
         Random rand=new Random();
-        int num=rand.nextInt(6);
-        if((num==0&&dep>0)||dep>=2) {
-            return String.format("%d",rand.nextInt(9)+1);
-        }
-        else if(num==1){
-            return ee(dep+1)+" + "+ee(dep+1);
-        }
-        else if(num==2){
-            return ee(dep+1)+" - "+ee(dep+1);
-        }
-        else if(num==3){
-            return ee(dep+1)+" * "+ee(dep+1);
-        }
-         /*else if(num==4){
-                return ee(dep+1)+" / "+ee(dep+1);
-        }*/
-        else return " ( "+e2(dep+1)+" ) ";
-    }
+        int num=rand.nextInt(23)+1;
 
-    public  String e2(int dep) {
-        Random rand=new Random();
-        int num=rand.nextInt(4)+1;
-        if(num==1){
-            return ee(dep+1)+" + "+ee(dep+1);
+        f anst=new f();f s1=new f();f s2=new f();f s3=new f();f s4=new f();
+        s1=setf(s1);s2=setf(s2);s3=setf(s3);s4=setf(s4);
+        String ss="";
+        switch (num)
+        {
+            case 1:
+                anst=reducef(addf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 2:
+                anst=reducef(reducef(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 3:
+                anst=reducef(reducef(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") - ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 4:
+                anst=chengf(addf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 5:
+                anst=chengf(addf(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 6:
+                anst=chengf(reducef(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 7:
+                anst=chengf(reducef(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 8:
+                anst=chengf(chengf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 9:
+                anst=chengf(chengf(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                // System.out.println("("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 10:
+                anst=chuf(addf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") / ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 11:
+                anst=chuf(addf(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") / ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 12:
+                anst=chuf(reducef(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") / ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 13:
+                anst=chuf(reducef(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") / ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 14:
+                anst=chuf(chengf(s1,s2),addf(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") / ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+")";
+                //System.out.println("("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 15:
+                anst=chuf(chengf(s1,s2),reducef(s3,s4));
+                ss="("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
+                // System.out.println("("+s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
+                break;
+            case 16:
+                anst=addf(addf(s1,s2),addf(s3,s4));
+                ss=s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+" + "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y;
+                //System.out.println(s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+" + "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 17:
+                anst=reducef(s1,reducef(reducef(s2,s3),s4));
+                ss=s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+" - "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y;
+                //System.out.println(s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+" - "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 18:
+                anst=chengf(s1,chengf(s2,s3));
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y;
+                // System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 19:
+                anst=addf(chengf(s1,chengf(s2,s3)),s4);
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y;
+                // System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" + "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 20:
+                anst=reducef(chengf(s1,chengf(s2,s3)),s4);
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y;
+                //System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" * "+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 21:
+                anst=addf(s1,chuf(s2,s3));
+                ss=s1.x+"/"+s1.y+" + ("+s2.x+"/"+s2.y+s3.x+"/"+s3.y+")";
+                //System.out.println(s1.x+"/"+s1.y+" + "+s2.x+"/"+s2.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 22:
+                anst=chuf(reducef(s1,s2),s3);
+                ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") / "+s3.x+"/"+s3.y;
+                //System.out.println(s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+" = "+anst.x+"/"+anst.y);
+                break;
+            case 23:
+                anst=chuf(chengf(s1,s2),s3);
+                ss=s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" / "+s3.x+"/"+s3.y;
+                //System.out.println(s1.x+"/"+s1.y+" * "+s2.x+"/"+s2.y+" = "+anst.x+"/"+anst.y);
+                break;
         }
-        else if(num==2){
-            return ee(dep+1)+" - "+ee(dep+1);
+        if(anst.x/anst.y>=0)
+        {
+            System.out.println(ss+" = ");
         }
-        else {
-            return ee(dep+1)+" * "+ee(dep+1);
-        }
-       /* else {
-            return ee(dep+1)+" / "+ee(dep+1);
-        }*/
+        return anst;
     }
 }
