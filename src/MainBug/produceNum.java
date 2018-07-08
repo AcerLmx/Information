@@ -234,7 +234,7 @@ public class produceNum {
                 break;
         }
         if(anst.x/anst.y>=0)
-        { System.out.println(ss);
+        { System.out.println(ss+" = ");
         }
     return anst;
     }
@@ -282,7 +282,6 @@ public class produceNum {
             case 7:
                 anst=chengf(reducef(s1,s2),reducef(s3,s4));
                 ss="("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+")";
-                //System.out.println("("+s1.x+"/"+s1.y+" - "+s2.x+"/"+s2.y+") * ("+s3.x+"/"+s3.y+" - "+s4.x+"/"+s4.y+") = "+anst.x+"/"+anst.y);
                 break;
             case 8:
                 anst=chengf(chengf(s1,s2),addf(s3,s4));
